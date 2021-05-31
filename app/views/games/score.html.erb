@@ -1,0 +1,9 @@
+
+<h1>Result</h1>
+
+<% if @info[:score] <= 0%>
+  <h4>Sorry but<%=@word%> is <%=@info[:message]%></h4>
+<% else %>
+  <h4>Congratulations! <%=@word%> is <%=@info[:message]%></h4>
+  <h3>Your score is: <%=@info[:score]%></h3>
+<% end %>

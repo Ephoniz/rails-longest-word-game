@@ -1,0 +1,15 @@
+<h2>New Game</h2>
+
+<div class="letters-container">
+  <% @letters.each do |letter|%>
+    <div class="letter">
+      <%= letter %>
+    </div>
+  <% end %>
+</div>
+
+<form action="/score">
+  <input type="text" name="word">
+  <input type="hidden" name="grid" value="<%= @letters %>">
+  <input type="submit" value="Write the longest word!">
+</form>

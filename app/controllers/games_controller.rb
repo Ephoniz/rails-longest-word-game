@@ -1,11 +1,12 @@
 require 'open-uri'
 require 'json'
+require 'rest-client'
 
 class GamesController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def new
-    @letters = (1..10).map do
-      ('A'..'Z').to_a[rand(26)]
-    end
+    @letters = Array.new(7) { ('A'..'Z').to_a[rand(26)] } + Array.new(3) { %w[A E I O U].sample }
   end
 
   def score
@@ -40,7 +41,7 @@ class GamesController < ApplicationController
 
   def english_word?(attempt)
     url = "https://wagon-dictionary.herokuapp.com/#{attempt}"
-    word_serialized = URI.open(url).read
+    word_serialized = RestClient.get(url)
     word = JSON.parse(word_serialized)
     word['found']
   end
